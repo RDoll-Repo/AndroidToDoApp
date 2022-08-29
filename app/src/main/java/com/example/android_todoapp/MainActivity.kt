@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
                 add<HomeFragment>(R.id.fragment_container_view)
+                //add<CardFragment>(R.id.fragment_container_view)
             }
         }
     }
