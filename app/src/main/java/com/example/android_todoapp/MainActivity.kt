@@ -2,6 +2,7 @@ package com.example.android_todoapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.CheckBox
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
@@ -17,11 +18,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 //        if (savedInstanceState == null) {
-            val x = ToDo("Test","2022-12-01", "2022-12-02", false)
-            val y = ToDo("RecyclerView", "2022-12-01", "2024-02-02", true)
-            val z = ToDo("Do the dishes", "2022-12-01", "2022-12-02", true)
+        val u = ToDo("Stuff", "2022-12-01", "2024-02-02", true)
+        val v = ToDo("Touch Grass", "2022-12-01", "2024-02-02", true)
+        val w = ToDo("become a competent developer", "2022-12-01", "2024-02-02", true)
+        val x = ToDo("Deal with Spectrum's bullshit","2022-12-01", "2022-12-02", false)
+        val y = ToDo("RecyclerView", "2022-12-01", "2024-02-02", true)
+        val z = ToDo("Do the dishes", "2022-12-01", "2022-12-02", false)
 
-            val list = arrayListOf<ToDo>(x, y ,z)
+        val list = arrayListOf<ToDo>(u, v, w, x, y ,z)
 
 
 //            val bundle = bundleOf("data" to list)
@@ -48,4 +52,6 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
     }
+
+
 }
