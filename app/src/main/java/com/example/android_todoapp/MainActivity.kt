@@ -12,12 +12,17 @@ import com.example.android_todoapp.models.ToDo
 import java.util.*
 import kotlin.collections.ArrayList
 
+// TODO: Basic CRUD on cards
+// TODO: Move Sample Data Store to separate file
+// TODO: Use fragments
+// TODO: Connect to API
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        if (savedInstanceState == null) {
+        // Sample Data Store - will be extracted to a separate file at some point
         val u = ToDo("Stuff", "2022-12-01", "2024-02-02", true)
         val v = ToDo("Touch Grass", "2022-12-01", "2024-02-02", true)
         val w = ToDo("become a competent developer", "2022-12-01", "2024-02-02", true)
@@ -27,20 +32,13 @@ class MainActivity : AppCompatActivity() {
 
         val list = arrayListOf<ToDo>(u, v, w, x, y ,z)
 
-
-//            val bundle = bundleOf("data" to list)
-//            supportFragmentManager.commit {
-//                setReorderingAllowed(true)
-//                add<HomeFragment>(R.id.fragment_container_view)
-//            }
-//        }
-
         // Get recycler view by ID
         val recyclerView = findViewById<RecyclerView>(R.id.list)
 
         // create layout manager
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        // Initializing
         val data = ArrayList<ToDo>()
 
         for (i in list)
@@ -52,6 +50,4 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
     }
-
-
 }
