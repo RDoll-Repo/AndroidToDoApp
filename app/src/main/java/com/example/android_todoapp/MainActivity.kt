@@ -8,6 +8,7 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android_todoapp.databinding.ActivityMainBinding
 import com.example.android_todoapp.models.ToDo
 import java.util.*
 import kotlin.collections.ArrayList
@@ -18,9 +19,14 @@ import kotlin.collections.ArrayList
 // TODO: Connect to API
 
 class MainActivity : AppCompatActivity() {
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Sample Data Store - will be extracted to a separate file at some point
         val u = ToDo("Stuff", "2022-12-01", "2024-02-02", true)
@@ -32,8 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         val list = arrayListOf<ToDo>(u, v, w, x, y ,z)
 
-        // Get recycler view by ID
-        val recyclerView = findViewById<RecyclerView>(R.id.list)
+        val recyclerView = binding.list
 
         // create layout manager
         recyclerView.layoutManager = LinearLayoutManager(this)
