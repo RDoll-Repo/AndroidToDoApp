@@ -1,4 +1,4 @@
-package com.example.android_todoapp
+package com.example.android_todo_app
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
-import com.example.android_todoapp.models.ToDo
+import android_todo_app.R
+import android_todo_app.databinding.ActivityMainBinding
+import com.example.android_todo_app.models.ToDo
 
 class ToDoRecyclerAdapter(private val dataSet: List<ToDo>) :
     RecyclerView.Adapter<ToDoRecyclerAdapter.ViewHolder>(){
+
+//    private var _binding: ActivityMainBinding? = null
+//    private val binding get() = _binding!!
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
@@ -21,9 +26,7 @@ class ToDoRecyclerAdapter(private val dataSet: List<ToDo>) :
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val toDoVM = dataSet[position]
 
-        viewHolder.description.text = toDoVM.description
-        viewHolder.dueDate.text = toDoVM.dueDate.toString()
-        viewHolder.completed.isChecked = toDoVM.completed
+        viewHolder.bindToDo(toDoVM)
     }
 
     override fun getItemCount() = dataSet.size
@@ -37,6 +40,12 @@ class ToDoRecyclerAdapter(private val dataSet: List<ToDo>) :
             description = view.findViewById(R.id.description)
             dueDate = view.findViewById(R.id.dueDate)
             completed = view.findViewById(R.id.checkbox)
+        }
+
+        fun bindToDo(toDoVM: ToDo) {
+            this.description.text = toDoVM.description
+            this.dueDate.text = toDoVM.dueDate.toString()
+            this.completed.isChecked = toDoVM.completed
         }
     }
 

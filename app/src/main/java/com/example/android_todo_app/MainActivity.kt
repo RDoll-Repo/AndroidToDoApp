@@ -1,15 +1,10 @@
-package com.example.android_todoapp
+package com.example.android_todo_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.CheckBox
-import androidx.core.os.bundleOf
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
+import android_todo_app.databinding.ActivityMainBinding
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.android_todoapp.databinding.ActivityMainBinding
-import com.example.android_todoapp.models.ToDo
+import com.example.android_todo_app.models.ToDo
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -31,8 +26,8 @@ class MainActivity : AppCompatActivity() {
         // Sample Data Store - will be extracted to a separate file at some point
         val u = ToDo("Stuff", "2022-12-01", "2024-02-02", true)
         val v = ToDo("Touch Grass", "2022-12-01", "2024-02-02", true)
-        val w = ToDo("become a competent developer", "2022-12-01", "2024-02-02", true)
-        val x = ToDo("Deal with Spectrum's bullshit","2022-12-01", "2022-12-02", false)
+        val w = ToDo("become a competent developer", "2022-12-01", "2024-02-02", false)
+        val x = ToDo("Deal with Spectrum's bullshit","2022-12-01", "2022-12-02", true)
         val y = ToDo("RecyclerView", "2022-12-01", "2024-02-02", true)
         val z = ToDo("Do the dishes", "2022-12-01", "2022-12-02", false)
 
