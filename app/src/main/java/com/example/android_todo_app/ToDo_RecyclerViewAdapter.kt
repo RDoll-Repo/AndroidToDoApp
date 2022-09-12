@@ -8,22 +8,20 @@ import android.widget.CheckBox
 import android.widget.TextView
 import android_todo_app.R
 import android_todo_app.databinding.ActivityMainBinding
+import android_todo_app.databinding.CardBinding
 import com.example.android_todo_app.models.ToDo
 
-class ToDoRecyclerAdapter(private val dataSet: List<ToDo>) :
-    RecyclerView.Adapter<ToDoRecyclerAdapter.ViewHolder>(){
+class ToDoRecyclerAdapter(private val dataSet: List<ToDo>)
+    : RecyclerView.Adapter<ToDoRecyclerAdapter.ToDoViewHolder>() {
 
-//    private var _binding: ActivityMainBinding? = null
-//    private val binding get() = _binding!!
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoViewHolder {
+        val binding = CardBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.card, viewGroup, false)
-
-        return ViewHolder(view)
+        return ToDoViewHolder(binding)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ToDoViewHolder, position: Int) {
         val toDoVM = dataSet[position]
 
         viewHolder.bindToDo(toDoVM)
@@ -31,21 +29,11 @@ class ToDoRecyclerAdapter(private val dataSet: List<ToDo>) :
 
     override fun getItemCount() = dataSet.size
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val description: TextView
-        val dueDate: TextView
-        val completed: CheckBox
-
-        init {
-            description = view.findViewById(R.id.description)
-            dueDate = view.findViewById(R.id.dueDate)
-            completed = view.findViewById(R.id.checkbox)
-        }
-
+    class ToDoViewHolder(private val binding: CardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindToDo(toDoVM: ToDo) {
-            this.description.text = toDoVM.description
-            this.dueDate.text = toDoVM.dueDate.toString()
-            this.completed.isChecked = toDoVM.completed
+            binding.description.text = toDoVM.description
+            binding.dueDate.text = toDoVM.dueDate
+            binding.checkbox.isChecked = toDoVM.completed
         }
     }
 

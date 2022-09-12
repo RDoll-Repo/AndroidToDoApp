@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
         // Sample Data Store - will be extracted to a separate file at some point
         val u = ToDo("Stuff", "2022-12-01", "2024-02-02", true)
         val v = ToDo("Touch Grass", "2022-12-01", "2024-02-02", true)
-        val w = ToDo("become a competent developer", "2022-12-01", "2024-02-02", false)
-        val x = ToDo("Deal with Spectrum's bullshit","2022-12-01", "2022-12-02", true)
+        val w = ToDo("Get viewbinding working in cards", "2022-12-01", "2024-02-02", true)
+        val x = ToDo("Move mock data store","2022-12-01", "2022-12-02", false)
         val y = ToDo("RecyclerView", "2022-12-01", "2024-02-02", true)
         val z = ToDo("Do the dishes", "2022-12-01", "2022-12-02", false)
 
