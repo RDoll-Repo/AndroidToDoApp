@@ -18,7 +18,8 @@ class ToDoViewModel: ViewModel() {
         list.value = newList
     }
 
-    fun updateToDo(toDo:ToDo) {
-        newList.
+    fun updateToDo(toDo:ToDo, updated:ToDo) {
+        newList.set(newList.indexOf(toDo), updated)
+        list.value = newList
     }
 }

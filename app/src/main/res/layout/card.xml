@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 tools:text="Sample Task"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/editButton"
                 app:layout_constraintStart_toStartOf="@id/guideLine"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,6 +45,15 @@
                 tools:text="Due Date"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/endguideLine" />
+
+            <Button
+                android:id="@+id/editButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideLine"/>
+
 
             <CheckBox
                 android:id="@+id/checkbox"
