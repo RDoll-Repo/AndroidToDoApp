@@ -35,11 +35,21 @@ class ToDoRecyclerAdapter(private val dataSet: List<ToDo>)
 
     override fun getItemCount() = dataSet.size
 
-    class ToDoViewHolder(private val binding: CardBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ToDoViewHolder(private val binding: CardBinding): RecyclerView.ViewHolder(binding.root) {
         fun bindToDo(toDoVM: ToDo) {
             binding.description.text = toDoVM.description
             binding.dueDate.text = toDoVM.dueDate
             binding.checkbox.isChecked = toDoVM.completed
+
+            binding.editButton.setOnClickListener{
+                binding.description.editableText
+                binding.editButton.text = "Clicked"
+            }
+
+            binding.checkbox.setOnClickListener{
+                toDoVM.completed = binding.checkbox.isChecked
+                binding.dueDate.text = toDoVM.completed.toString()
+            }
         }
 
         @Override
