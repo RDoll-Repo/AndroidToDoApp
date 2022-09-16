@@ -2,19 +2,15 @@ package com.example.android_todo_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android_todo_app.R
 import android_todo_app.databinding.ActivityMainBinding
-import androidx.lifecycle.MutableLiveData
+import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android_todo_app.models.ToDo
 import com.example.android_todo_app.viewmodels.ToDoViewModel
-import java.util.*
-import kotlin.collections.ArrayList
-
-// TODO: Basic CRUD on cards
-// TODO: Move Sample Data Store to separate file
 // TODO: Use fragments
+// TODO: Cleanup
 // TODO: Connect to API
 
 class MainActivity : AppCompatActivity() {
@@ -51,7 +47,15 @@ class MainActivity : AppCompatActivity() {
             var added = ToDo("Add Button", "2022-9-20", "2022-9-15", false)
             tdvm.addToDo(added)
             adapter.notifyDataSetChanged()
+
         }
+    }
+
+    private fun setupNavigation() {
+//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+//        val navController = navHostFragment.navController
+//
+//        navController.navInflater.inflate(R.navigationGr)
     }
 
 }
