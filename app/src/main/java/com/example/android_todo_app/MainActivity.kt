@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import android_todo_app.databinding.ActivityMainBinding
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android_todo_app.models.ToDo
+import com.example.android_todo_app.viewmodels.ToDoViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -16,7 +19,8 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
+    var tdvm = ToDoViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,14 +34,23 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Initializing
-        val data = ToDoList.todoList
+        val liveData = tdvm.data
+        val data = tdvm.list
 
-        val adapter = ToDoRecyclerAdapter(data)
+        val adapter = ToDoRecyclerAdapter(data, tdvm)
 
         recyclerView.adapter = adapter
 
+        liveData.observe(this, Observer {
+            adapter.notifyDataSetChanged()
+        })
+
+
+
         binding.buttonAdd.setOnClickListener {
-            Toast.makeText(this, "Clicked!", Toast.LENGTH_LONG).show()
+            var added = ToDo("Add Button", "2022-9-20", "2022-9-15", false)
+            tdvm.addToDo(added)
+            adapter.notifyDataSetChanged()
         }
     }
 

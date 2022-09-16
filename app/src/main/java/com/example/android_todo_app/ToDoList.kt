@@ -3,7 +3,7 @@ package com.example.android_todo_app
 import com.example.android_todo_app.models.ToDo
 
 object ToDoList {
-    val todoList = listOf<ToDo>(
+    val todoList = arrayListOf<ToDo>(
         // Sample Data Store - will be extracted to a separate file at some point
         ToDo("Stuff", "2022-12-01", "2024-02-02", true),
         ToDo("Touch Grass", "2022-12-01", "2024-02-02", true),

@@ -10,11 +10,13 @@ import android.widget.Toast
 import android_todo_app.R
 import android_todo_app.databinding.ActivityMainBinding
 import android_todo_app.databinding.CardBinding
+import androidx.fragment.app.Fragment
 import com.example.android_todo_app.models.ToDo
 import com.example.android_todo_app.viewmodels.ToDoViewModel
 
-class ToDoRecyclerAdapter(private val dataSet: List<ToDo>)
+class ToDoRecyclerAdapter(private val dataSet: ArrayList<ToDo>, tdvm: ToDoViewModel)
     : RecyclerView.Adapter<ToDoRecyclerAdapter.ToDoViewHolder>() {
+    var tdvm = tdvm
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoViewHolder {
         val binding = CardBinding
@@ -35,30 +37,26 @@ class ToDoRecyclerAdapter(private val dataSet: List<ToDo>)
 
     override fun getItemCount() = dataSet.size
 
-    class ToDoViewHolder(private val binding: CardBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ToDoViewHolder(private val binding: CardBinding): RecyclerView.ViewHolder(binding.root) {
         fun bindToDo(toDoVM: ToDo) {
             binding.description.text = toDoVM.description
             binding.dueDate.text = toDoVM.dueDate
             binding.checkbox.isChecked = toDoVM.completed
+            //var tdvm = ToDoViewModel()
 
             binding.editButton.setOnClickListener{
-                binding.description.editableText
-                binding.editButton.text = "Clicked"
+                var updated = ToDo("Updated", "2022-12-01", "2024-02-02", true)
+                tdvm.updateToDo(toDoVM, updated)
+            }
+
+            binding.deleteButton.setOnClickListener{
+                tdvm.removeToDo(toDoVM)
             }
 
             binding.checkbox.setOnClickListener{
                 toDoVM.completed = binding.checkbox.isChecked
-                binding.dueDate.text = toDoVM.completed.toString()
-            }
-        }
-
-        @Override
-        fun onClick(v: View) {
-            if (v.id == binding.editButton.id)
-            {
-                Toast.makeText(v.context, adapterPosition.toString(), Toast.LENGTH_LONG).show()
+                tdvm.updateToDo(toDoVM, toDoVM)
             }
         }
     }
-
 }
