@@ -1,5 +1,6 @@
 package com.example.android_todo_app
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +32,6 @@ class ToDoRecyclerAdapter(private val dataSet: ArrayList<ToDo>, tdvm: ToDoViewMo
         viewHolder.itemId
 
         viewHolder.bindToDo(toDoVM)
-
 
     }
 

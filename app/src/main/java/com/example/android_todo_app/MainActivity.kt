@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android_todo_app.R
 import android_todo_app.databinding.ActivityMainBinding
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android_todo_app.models.ToDo
 import com.example.android_todo_app.viewmodels.ToDoViewModel
+import java.io.Console
+import java.lang.Exception
+
 // TODO: Use fragments
 // TODO: Cleanup
 // TODO: Connect to API
@@ -41,21 +46,15 @@ class MainActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         })
 
-
-
         binding.buttonAdd.setOnClickListener {
-            var added = ToDo("Add Button", "2022-9-20", "2022-9-15", false)
-            tdvm.addToDo(added)
-            adapter.notifyDataSetChanged()
-
+            var frag = CRUD_Fragment(null, tdvm)
+            var manager = supportFragmentManager
+            var transaction = manager.beginTransaction()
+            transaction.replace(R.id.fragment_container_view, frag)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
     }
 
-    private fun setupNavigation() {
-//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-//        val navController = navHostFragment.navController
-//
-//        navController.navInflater.inflate(R.navigationGr)
-    }
 
 }
