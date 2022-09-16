@@ -2,9 +2,13 @@ package com.example.android_todo_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import android_todo_app.databinding.ActivityMainBinding
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android_todo_app.models.ToDo
+import com.example.android_todo_app.viewmodels.ToDoViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -15,7 +19,8 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
+    var tdvm = ToDoViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,31 +28,30 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Sample Data Store - will be extracted to a separate file at some point
-        val u = ToDo("Stuff", "2022-12-01", "2024-02-02", true)
-        val v = ToDo("Touch Grass", "2022-12-01", "2024-02-02", true)
-        val w = ToDo("Get viewbinding working in cards", "2022-12-01", "2024-02-02", true)
-        val x = ToDo("Move mock data store","2022-12-01", "2022-12-02", false)
-        val y = ToDo("RecyclerView", "2022-12-01", "2024-02-02", true)
-        val z = ToDo("Do the dishes", "2022-12-01", "2022-12-02", false)
-
-        val list = arrayListOf<ToDo>(u, v, w, x, y ,z)
-
         val recyclerView = binding.list
 
         // create layout manager
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Initializing
-        val data = ArrayList<ToDo>()
+        val liveData = tdvm.data
+        val data = tdvm.list
 
-        for (i in list)
-        {
-            data.add(i)
-        }
-
-        val adapter = ToDoRecyclerAdapter(data)
+        val adapter = ToDoRecyclerAdapter(data, tdvm)
 
         recyclerView.adapter = adapter
+
+        liveData.observe(this, Observer {
+            adapter.notifyDataSetChanged()
+        })
+
+
+
+        binding.buttonAdd.setOnClickListener {
+            var added = ToDo("Add Button", "2022-9-20", "2022-9-15", false)
+            tdvm.addToDo(added)
+            adapter.notifyDataSetChanged()
+        }
     }
+
 }
