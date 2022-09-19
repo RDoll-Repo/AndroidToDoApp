@@ -38,7 +38,16 @@ class MainActivity : AppCompatActivity() {
         val liveData = tdvm.data
         val data = tdvm.list
 
-        val adapter = ToDoRecyclerAdapter(data, tdvm)
+        val adapter = ToDoRecyclerAdapter(data, tdvm, object : ClickListener {
+            override fun onClick(toDo:ToDo) {
+                var frag = CRUD_Fragment(toDo, tdvm)
+                var manager = supportFragmentManager
+                var transaction = manager.beginTransaction()
+                transaction.replace(R.id.fragment_container_view, frag)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        })
 
         recyclerView.adapter = adapter
 
@@ -54,7 +63,11 @@ class MainActivity : AppCompatActivity() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
+
+
     }
+}
 
-
+interface ClickListener {
+    fun onClick(toDo: ToDo)
 }
